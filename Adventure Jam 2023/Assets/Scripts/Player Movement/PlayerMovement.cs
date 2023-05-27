@@ -21,11 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public bool wallGrab;
     public bool wallJumped;
     public bool wallSlide;
-    public bool limitVelocity = true;
+    public bool limitVelocity = true;   
 
-    [Space]
-
-    private bool groundTouch;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        float xRaw = Input.GetAxisRaw("Horizontal");
-        float yRaw = Input.GetAxisRaw("Vertical");
+        //float xRaw = Input.GetAxisRaw("Horizontal");
+        //float yRaw = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
 
         //Horizontal Movement
@@ -67,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (coll.onGround)
             {
-                Jump(Vector2.up, false);
+                Jump(dir, false);
             }
             if (coll.onWall && !coll.onGround)
             {
@@ -100,10 +97,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (!wallJumped)
         {
+            //Has not wall jumped
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         }
         else
         {
+            //Has wall jumped
             rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
         }
     }
@@ -112,7 +111,15 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         dir.Normalize();
-        Vector2 force = dir * jumpForce;
+        Vector2 force;
+        if (!wall)
+        {
+            force = Vector2.up * jumpForce;
+        }
+        else
+        {
+            force = dir * jumpForce;
+        }
         force.x = dir.x * speed;
         rb.velocity += force;
     }
@@ -124,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
             side *= -1;
         }
 
-        StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(.1f));
 
         Vector2 wallDir = coll.onRightWall ? Vector2.left : Vector2.right;
@@ -137,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
     private void WallSlide()
     {
         if (!canMove) { return; }
+        if (rb.velocity.y > 0) { return; }
 
         bool pushingWall = false;
         if ((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall))
