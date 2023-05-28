@@ -6,8 +6,7 @@ public class MouseLightController : MonoBehaviour
 {
     public float speed = 20f;
 
-    public GameObject followLight;
-    public GameObject waitLight;
+    public UnityEngine.Rendering.Universal.Light2D light2D;
 
     //StateMachineStuff
     MouseLightStateClass currentState;
