@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(dir == Vector2.zero)
         {
-            //Do nothing rn
+            //Dont change velocity
         }
         else
         {
