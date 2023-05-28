@@ -100,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
             //Has not wall jumped
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         }
+        else if(dir == Vector2.zero)
+        {
+            //Do nothing rn
+        }
         else
         {
             //Has wall jumped
@@ -131,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
             side *= -1;
         }
 
-        StartCoroutine(DisableMovement(.1f));
+        StartCoroutine(DisableMovement(.15f));
 
         Vector2 wallDir = coll.onRightWall ? Vector2.left : Vector2.right;
         Debug.Log(Vector2.up / 1.5f + wallDir / 1.5f);

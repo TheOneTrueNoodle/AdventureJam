@@ -397,7 +397,7 @@ MonoBehaviour:
   maxSpeed: 7
   jumpForce: 20
   slideSpeed: 3
-  wallJumpLerp: 10
+  wallJumpLerp: 50
   side: 1
   canMove: 1
   wallGrab: 0
