@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
     private CollisionDetection coll;
+    [SerializeField] private GameObject gfx;
 
     [Header("Stats")]
     public float speed = 10f;
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         //Facing direction and moving direction
         if (x > 0)
         {
-            side = 1;
+            side = 1; 
             //anim.Flip(side);
         }
         if (x < 0)
@@ -90,6 +91,9 @@ public class PlayerMovement : MonoBehaviour
             side = -1;
             //anim.Flip(side);
         }
+
+
+        gfx.transform.localScale = new Vector2(side, gfx.transform.localScale.y);
     }
     private void Walk(Vector2 dir)
     {
@@ -107,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //Has wall jumped
-            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)),  wallJumpLerp * Time.deltaTime);
         }
     }
 
