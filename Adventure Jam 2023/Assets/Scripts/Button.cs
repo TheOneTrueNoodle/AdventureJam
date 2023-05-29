@@ -7,7 +7,8 @@ public class Button : MonoBehaviour
 {
     private bool playerNear;
     private bool buttonActive;
-    public UnityEvent buttonAction;
+    public UnityEvent buttonPressedAction;
+    public UnityEvent buttonReleaseAction;
 
     [SerializeField] private GameObject ButtonObj;
     [SerializeField] private GameObject ButtonPressedObj;
@@ -46,14 +47,14 @@ public class Button : MonoBehaviour
             buttonActive = false;
             ButtonPressedObj.SetActive(false);
             ButtonObj.SetActive(true);
-            buttonAction.Invoke();
+            buttonReleaseAction.Invoke();
         }
         else
         {
             buttonActive = true;
             ButtonPressedObj.SetActive(true);
             ButtonObj.SetActive(false);
-            buttonAction.Invoke();
+            buttonPressedAction.Invoke();
         }
     }
 }
