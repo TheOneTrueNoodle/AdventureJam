@@ -4,42 +4,90 @@ using UnityEngine;
 
 public class LightRayRenderer : MonoBehaviour
 {
+    [Header("Light Prism GFX")]
     public bool hasLight;
+    public float lightChargeRate = 10f;
+
+    [Header("Debug Display")]
+    public float lightCurrentCharge;
+    public bool charged;
 
     [Header("Light Ray Stats")]
     public direction shootDirection;
     public float lightRayCooldown = 1f;
     private float lightRayCooldownCurrent;
     public GameObject lightRayPrefab;
+
     [HideInInspector] public List<GameObject> activeRays = new List<GameObject>();
+    private SpriteRenderer gfx;
 
     private void Start()
     {
         lightRayCooldownCurrent = lightRayCooldown;
+        lightCurrentCharge = 0;
+        gfx = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         if(hasLight)
         {
-            if(lightRayCooldownCurrent <= 0)
+            if(charged)
             {
-                //Shoot ray
-                lightRayCooldownCurrent = lightRayCooldown;
-                GameObject newRay = Instantiate(lightRayPrefab);
-                newRay.transform.position = transform.position;
+                if (lightRayCooldownCurrent <= 0)
+                {
+                    //Shoot ray
+                    lightRayCooldownCurrent = lightRayCooldown;
+                    GameObject newRay = Instantiate(lightRayPrefab);
+                    newRay.transform.position = transform.position;
 
-                LightRay lightRay = newRay.GetComponent<LightRay>();
+                    LightRay lightRay = newRay.GetComponent<LightRay>();
 
-                int rayID = activeRays.Count;
-                activeRays.Add(newRay);
+                    int rayID = activeRays.Count;
+                    activeRays.Add(newRay);
 
-                lightRay.CreateRay(this, getDirection(shootDirection), rayID);
+                    lightRay.CreateRay(this, getDirection(shootDirection), rayID);
+                }
+                else
+                {
+                    lightRayCooldownCurrent -= Time.deltaTime;
+                }
             }
             else
             {
-                lightRayCooldownCurrent -= Time.deltaTime;
+                lightCurrentCharge += lightChargeRate * Time.deltaTime;
+                if(lightCurrentCharge >= 1f)
+                {
+                    lightCurrentCharge = 1f;
+                    charged = true;
+                }
             }
+        }
+        else
+        {
+            charged = false;
+            if (lightCurrentCharge > 0)
+            {
+                lightCurrentCharge -= lightChargeRate * Time.deltaTime;
+                if(lightCurrentCharge < 0) { lightCurrentCharge = 0; }
+            }
+        }
+
+        gfx.color = new Color(lightCurrentCharge, lightCurrentCharge, lightCurrentCharge);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Mouse Light")
+        {
+            hasLight = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Mouse Light")
+        {
+            hasLight = false;
         }
     }
 

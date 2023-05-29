@@ -9,6 +9,8 @@ public class MouseLightWaitState : MouseLightStateClass
 
     public override void EnterState(MouseLightController element)
     {
+        element.gameObject.layer = LayerMask.NameToLayer("Ground");
+        element.rb.bodyType = RigidbodyType2D.Kinematic;
         minimum = element.light2D.pointLightOuterRadius;
         t = 0;
     }

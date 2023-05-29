@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 114037441}
   - component: {fileID: 114037440}
   - component: {fileID: 114037439}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583482294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4404144, y: 1.6093659, z: -10}
+  m_LocalPosition: {x: 6.4444447, y: 1.6093659, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1187,7 +1187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603284515}
   m_LocalRotation: {x: -0, y: -0, z: -0.38268322, w: 0.9238797}
-  m_LocalPosition: {x: 1.76, y: -1.97, z: 0.042444002}
+  m_LocalPosition: {x: 2, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6517,13 +6517,14 @@ GameObject:
   - component: {fileID: 894606606}
   - component: {fileID: 894606605}
   - component: {fileID: 894606607}
+  - component: {fileID: 894606608}
   m_Layer: 0
   m_Name: Light Prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &894606605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6584,7 +6585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894606604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.02, y: -1.55, z: 0}
+  m_LocalPosition: {x: 17, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6604,11 +6605,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46fa60a63be64541aa3eeb437249629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasLight: 1
+  hasLight: 0
+  lightChargeRate: 1
+  lightCurrentCharge: 0
+  charged: 0
   shootDirection: 2
   lightRayCooldown: 1
   lightRayPrefab: {fileID: 2431868802393290638, guid: ebcb54ba5a5dbf048bc286d539e11c92, type: 3}
   activeRays: []
+--- !u!58 &894606608
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894606604}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!1 &1320444778
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,9 +6641,11 @@ GameObject:
   - component: {fileID: 1320444779}
   - component: {fileID: 1320444782}
   - component: {fileID: 1320444783}
-  m_Layer: 0
+  - component: {fileID: 1320444784}
+  - component: {fileID: 1320444785}
+  m_Layer: 3
   m_Name: Mouse Light
-  m_TagString: Untagged
+  m_TagString: Mouse Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6707,7 +6729,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8931b6aa62e144e9de1480c17253e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   speed: 20
+  acceleration: 30
+  stoppingDistance: 0.2
   light2D: {fileID: 1320444783}
 --- !u!114 &1320444783
 MonoBehaviour:
@@ -6788,6 +6813,43 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!58 &1320444784
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320444778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &1320444785
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320444778}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1434539452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6909,7 +6971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536498963}
   - component: {fileID: 1536498964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7081,7 +7143,7 @@ GameObject:
   - component: {fileID: 1823368494}
   - component: {fileID: 1823368496}
   - component: {fileID: 1823368495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12174,10 +12236,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPressedAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 894606604}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   buttonReleaseAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 894606604}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ButtonObj: {fileID: 1883321748}
   ButtonPressedObj: {fileID: 816315986}
 --- !u!1 &1939901474

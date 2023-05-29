@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MouseLightController : MonoBehaviour
 {
+    [HideInInspector] public Rigidbody2D rb;
     public float speed = 20f;
+    public float acceleration = 10f;
+    public float stoppingDistance = 0.5f;
 
     public UnityEngine.Rendering.Universal.Light2D light2D;
 
@@ -19,6 +22,7 @@ public class MouseLightController : MonoBehaviour
     private void Start()
     {
         currentState = followState;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()

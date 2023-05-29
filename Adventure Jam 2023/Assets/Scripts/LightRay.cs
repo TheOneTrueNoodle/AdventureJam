@@ -37,6 +37,11 @@ public class LightRay : MonoBehaviour
             Vector2 newDirection = Vector2.Reflect(currentDirection, collision.contacts[0].normal);
             currentDirection = newDirection;
         }
+        else if (collision.gameObject.GetComponent<LightRayGoal>())
+        {
+            collision.gameObject.GetComponent<LightRayGoal>().Activate();
+            Destroy(gameObject);
+        }
         else
         {
             parentRenderer.activeRays.RemoveAt(rayID);

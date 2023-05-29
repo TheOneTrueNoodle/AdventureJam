@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mirror
+  - Mouse Light
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Mouse Light
   - Water
   - UI
   - Ground
-  - 
+  - Player
   - 
   - 
   - 
