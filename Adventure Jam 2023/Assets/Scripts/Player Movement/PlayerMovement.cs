@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
         Walk(dir);
 
         //Call Wall Slide
+
+        /*
         if (coll.onWall && !coll.onGround)
         {
             if (x != 0 && !wallGrab)
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
                 WallSlide();
             }
         }
+        */
 
         if (!coll.onWall || coll.onGround)
             wallSlide = false;
@@ -67,10 +70,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 Jump(dir, false);
             }
+            /*
             if (coll.onWall && !coll.onGround)
             {
                 WallJump();
             }
+            */
         }
 
         //Limit X and Y velocity
