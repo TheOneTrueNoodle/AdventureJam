@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5291089197801140474}
   - component: {fileID: 1526470963487282102}
   - component: {fileID: 196634769}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2594069617980868754}
   - component: {fileID: 8683241545969199510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

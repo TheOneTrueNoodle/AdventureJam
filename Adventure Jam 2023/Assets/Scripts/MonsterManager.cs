@@ -14,6 +14,9 @@ public class MonsterManager : MonoBehaviour
     public float killTime = 3f;
 
     public bool AllMonstersFrozen;
+    public bool monsterAttacking;
+
+    public GameObject screenBlack;
 
     private void Start()
     {
@@ -34,11 +37,13 @@ public class MonsterManager : MonoBehaviour
         if(playerInArea)
         {
             Debug.Log("AllMonstersFrozen = " + AllMonstersFrozen);
-            if(AllMonstersFrozen != true)
+            if(AllMonstersFrozen != true && monsterAttacking != true)
             {
                 if(currentAttackInterval <= 0)
                 {
-                    TriggerAttack();
+                    currentAttackInterval = Random.Range(minAttackInterval, maxAttackInterval);
+                    monsterAttacking = true;
+                    StartCoroutine(TriggerAttack());
                 }
                 else
                 {
@@ -48,11 +53,17 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    public void TriggerAttack()
+    public IEnumerator TriggerAttack()
     {
         Debug.Log("Starting Attack");
 
-        //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane+5)); //will get the middle of the screen
+        //Screen flashing (Temporary until i set up an animation for it)
+        screenBlack.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        screenBlack.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        screenBlack.SetActive(true);
+
         Monster newMonster = null;
         for(int i = 0; i < monsters.Count; i++)
         {
@@ -62,16 +73,20 @@ public class MonsterManager : MonoBehaviour
                 break;
             }
         }
-        if(newMonster != null)
+        if(newMonster != null && newMonster.isAttacking != true)
         {
             newMonster.unfreezeTime = unfreezeTime;
             newMonster.killTime = killTime;
 
-            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0));
+            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector2(Random.Range(0, Screen.width * 0.85f), Random.Range(0, Screen.height * 0.9f)));
+            screenPosition.z = Vector3.zero.z;
             newMonster.gameObject.transform.position = screenPosition;
 
             newMonster.BeginAttack();
         }
+
+        yield return new WaitForSeconds(0.2f);
+        screenBlack.SetActive(false);
     }
 
     public void checkMonstersFrozen()

@@ -7,7 +7,7 @@ public class Monster : MonoBehaviour
     [HideInInspector] public MonsterManager manager;
     [HideInInspector] public int ID;
 
-    [HideInInspector] public bool isFrozen = false;
+    public bool isFrozen = false;
     private bool lightNear;
     public bool isAttacking;
 
@@ -40,6 +40,10 @@ public class Monster : MonoBehaviour
             else if(!lightNear)
             {
                 unfreezeTime -= Time.deltaTime;
+                if(unfreezeTime <= 0)
+                {
+                    Unfreeze();
+                }
             }
         }
     }
@@ -47,6 +51,7 @@ public class Monster : MonoBehaviour
     public void Freeze()
     {
         isFrozen = true;
+        manager.monsterAttacking = false;
         manager.checkMonstersFrozen();
     }
 
@@ -65,31 +70,41 @@ public class Monster : MonoBehaviour
 
         isAttacking = true;
         spriteRenderer.enabled = true;
-        col.enabled = false;
+        col.enabled = true;
     }
 
     public void Kill()
     {
-
+        Debug.Log("YOU ARE DEAD BOZOOOOOO");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Mouse Light")
+        if(isAttacking)
         {
-            lightNear = true;
-            if(!isFrozen)
+            if (collision.tag == "Mouse Light")
             {
-                Freeze();
+                lightNear = true;
+                if (!isFrozen)
+                {
+                    Freeze();
+                }
+            }
+            else if(!isFrozen && collision.tag == "Player")
+            {
+                Kill();
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Mouse Light")
+        if (isAttacking)
         {
-            lightNear = false;
+            if (collision.tag == "Mouse Light")
+            {
+                lightNear = false;
+            }
         }
     }
 }
