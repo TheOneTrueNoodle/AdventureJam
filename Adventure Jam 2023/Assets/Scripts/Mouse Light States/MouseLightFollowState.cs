@@ -12,6 +12,7 @@ public class MouseLightFollowState : MouseLightStateClass
 
     public override void EnterState(MouseLightController element)
     {
+        element.anim.SetBool("platformOpen", false);
         element.gameObject.layer = LayerMask.NameToLayer("Mouse Light");
         element.rb.bodyType = RigidbodyType2D.Dynamic;
         minimum = element.light2D.pointLightOuterRadius;
