@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator anim;
     private CollisionDetection coll;
     [SerializeField] private GameObject gfx;
 
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         coll = GetComponent<CollisionDetection>();
     }
     private void Update()
@@ -39,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
 
         //Horizontal Movement
         Walk(dir);
+        anim.SetFloat("Horizontal", Mathf.Abs(x));
+        anim.SetFloat("VerticalVelocity", rb.velocity.y);
+        anim.SetBool("onGround", coll.onGround);
+        anim.SetBool("canMove", canMove);
 
         //Call Wall Slide
 
@@ -61,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             wallJumped = false;
             GetComponent<BetterJumping>().enabled = true;
+            anim.ResetTrigger("Jump");
         }
 
         //Jumping & Wall jumping
@@ -68,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (coll.onGround)
             {
+                anim.SetTrigger("Jump");
                 Jump(dir, false);
             }
             /*
