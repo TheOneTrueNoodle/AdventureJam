@@ -36,6 +36,7 @@ public class MouseLightFollowState : MouseLightStateClass
 
             currentVelocity = Vector2.MoveTowards(currentVelocity, targetVelocity, element.acceleration * Time.fixedDeltaTime);
 
+
             Vector2 movement = currentVelocity * Time.fixedDeltaTime;
 
             element.rb.MovePosition(element.rb.position + movement);
@@ -47,6 +48,9 @@ public class MouseLightFollowState : MouseLightStateClass
             currentVelocity = Vector2.zero;
             element.rb.velocity = Vector2.zero;
         }
+
+        float angle = -direction.x * element.rotationAmount * Mathf.Clamp(currentVelocity.magnitude / element.speed, 0, 1);
+        element.GFX.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (Input.GetButtonDown("Light Action"))
         {

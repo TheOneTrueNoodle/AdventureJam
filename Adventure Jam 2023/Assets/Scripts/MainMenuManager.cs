@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject settingsMenu;
 
     public AudioMixer audioMixer;
+    public AudioSource musicSource;
 
     
     public Image transition;
@@ -63,6 +64,7 @@ public class MainMenuManager : MonoBehaviour
         while(alphaChange < 1)
         {
             alphaChange += TransitionTime * Time.deltaTime;
+            musicSource.volume -= TransitionTime * Time.deltaTime;
             transition.color = new Color(transition.color.r, transition.color.g, transition.color.b, alphaChange);
             yield return new WaitForSeconds(TransitionTime * Time.deltaTime);
         }

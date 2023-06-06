@@ -9,6 +9,7 @@ public class MouseLightWaitState : MouseLightStateClass
 
     public override void EnterState(MouseLightController element)
     {
+        element.GFX.transform.rotation = Quaternion.Euler(Vector3.zero);
         element.anim.SetBool("platformOpen", true);
         element.gameObject.layer = LayerMask.NameToLayer("Ground");
         element.rb.bodyType = RigidbodyType2D.Kinematic;

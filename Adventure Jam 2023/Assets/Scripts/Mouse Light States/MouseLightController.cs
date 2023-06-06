@@ -11,6 +11,8 @@ public class MouseLightController : MonoBehaviour
     public float stoppingDistance = 0.5f;
 
     public UnityEngine.Rendering.Universal.Light2D light2D;
+    public GameObject GFX;
+    public float rotationAmount;
 
     //StateMachineStuff
     MouseLightStateClass currentState;
