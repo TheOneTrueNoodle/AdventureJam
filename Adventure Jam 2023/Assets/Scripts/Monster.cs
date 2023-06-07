@@ -14,13 +14,14 @@ public class Monster : MonoBehaviour
     public float unfreezeTime;
     public float killTime;
 
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private CapsuleCollider2D col;
-    
+    private Animator anim;
+
     private void Start()
     {
         col = GetComponent<CapsuleCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         spriteRenderer.enabled = false;
         col.enabled = false;
     }
@@ -50,6 +51,10 @@ public class Monster : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0.0f;
+        float frame = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        anim.Play("Monster Idle Statue", 0, frame);
+
         isFrozen = true;
         manager.monsterAttacking = false;
         manager.checkMonstersFrozen();
@@ -57,6 +62,9 @@ public class Monster : MonoBehaviour
 
     public void Unfreeze()
     {
+        anim.speed = 1f;
+        float frame = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        anim.Play("Monster Idle", 0, frame);
         isFrozen = false;
         isAttacking = false;
         spriteRenderer.enabled = false;
