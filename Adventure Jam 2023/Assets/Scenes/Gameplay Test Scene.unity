@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 17421467}
   - component: {fileID: 17421466}
   - component: {fileID: 17421468}
+  - component: {fileID: 17421469}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -384,6 +385,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 5663240}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &17421469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17421465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &82435033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,8 +1452,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603284515}
-  m_LocalRotation: {x: -0, y: -0, z: -0.38268322, w: 0.9238797}
-  m_LocalPosition: {x: 2, y: -1.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
+  m_LocalPosition: {x: 2.31, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1448,7 +1461,7 @@ Transform:
   - {fileID: 476635141}
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &641229147
 GameObject:
   m_ObjectHideFlags: 0
