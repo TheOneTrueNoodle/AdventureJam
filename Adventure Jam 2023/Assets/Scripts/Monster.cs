@@ -17,9 +17,11 @@ public class Monster : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     private CapsuleCollider2D col;
     private Animator anim;
+    private Rigidbody2D rb;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
         spriteRenderer.enabled = false;
@@ -51,6 +53,7 @@ public class Monster : MonoBehaviour
 
     public void Freeze()
     {
+        rb.gravityScale = 12f;
         anim.speed = 0.0f;
         float frame = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("Monster Idle Statue", 0, frame);
@@ -62,6 +65,7 @@ public class Monster : MonoBehaviour
 
     public void Unfreeze()
     {
+        rb.gravityScale = 0f;
         anim.speed = 1f;
         float frame = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         anim.Play("Monster Idle", 0, frame);
