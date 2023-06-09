@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentRenderer: {fileID: 0}
   currentDirection: {x: 0, y: 0, z: 0}
-  raySpeed: 30
+  raySpeed: 20
   rayID: 0
 --- !u!50 &1526470963487282102
 Rigidbody2D:
