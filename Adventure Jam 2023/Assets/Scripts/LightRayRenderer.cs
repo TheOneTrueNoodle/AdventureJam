@@ -73,7 +73,7 @@ public class LightRayRenderer : MonoBehaviour
             }
         }
 
-        gfx.color = new Color(lightCurrentCharge, lightCurrentCharge, lightCurrentCharge);
+        gfx.color = new Color(255, 255, 255, lightCurrentCharge);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
