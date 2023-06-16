@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MouseLightController : MonoBehaviour
 {
+    public GameObject player;
     [HideInInspector] public Animator anim;
     [HideInInspector] public Rigidbody2D rb;
     public float speed = 20f;
     public float acceleration = 10f;
     public float stoppingDistance = 0.5f;
+    public float teleportDistance = 20f;
 
     public UnityEngine.Rendering.Universal.Light2D light2D;
     public GameObject GFX;

@@ -29,7 +29,15 @@ public class MouseLightFollowState : MouseLightStateClass
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - element.rb.position;
 
-        if(direction.magnitude > element.stoppingDistance)
+        if (direction.magnitude >= element.teleportDistance)
+        {
+            currentVelocity = Vector2.zero;
+            element.rb.velocity = Vector2.zero;
+            element.rb.position = element.player.transform.position;
+
+            element.SwitchState(element.waitState);
+        }
+        else if(direction.magnitude > element.stoppingDistance)
         {
             direction.Normalize();
             Vector2 targetVelocity = direction * element.speed;
@@ -40,6 +48,7 @@ public class MouseLightFollowState : MouseLightStateClass
             Vector2 movement = currentVelocity * Time.fixedDeltaTime;
 
             element.rb.MovePosition(element.rb.position + movement);
+
         }
         else
         {
@@ -49,7 +58,7 @@ public class MouseLightFollowState : MouseLightStateClass
             element.rb.velocity = Vector2.zero;
         }
 
-        float angle = -direction.x * element.rotationAmount * Mathf.Clamp(currentVelocity.magnitude / element.speed, 0, 1);
+        float angle = -direction.x * element.rotationAmount * Mathf.Clamp(currentVelocity.magnitude / element.speed, 0, 10);
         element.GFX.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (Input.GetButtonDown("Light Action"))
