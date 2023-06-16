@@ -20,9 +20,9 @@ public class MouseLightFollowState : MouseLightStateClass
     }
     public override void UpdateState(MouseLightController element)
     {
-        if (element.light2D.pointLightOuterRadius != 4)
+        if (element.light2D.pointLightOuterRadius != element.followLightStrength)
         {
-            element.light2D.pointLightOuterRadius = Mathf.Lerp(minimum, 4, t);
+            element.light2D.pointLightOuterRadius = Mathf.Lerp(minimum, element.followLightStrength, t);
             t += 2f * Time.deltaTime;
         }
 

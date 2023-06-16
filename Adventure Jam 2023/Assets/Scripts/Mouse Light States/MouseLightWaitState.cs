@@ -18,9 +18,9 @@ public class MouseLightWaitState : MouseLightStateClass
     }
     public override void UpdateState(MouseLightController element)
     {
-        if(element.light2D.pointLightOuterRadius != 6)
+        if(element.light2D.pointLightOuterRadius != element.waitLightStrength)
         {
-            element.light2D.pointLightOuterRadius = Mathf.Lerp(minimum, 6, t);
+            element.light2D.pointLightOuterRadius = Mathf.Lerp(minimum, element.waitLightStrength, t);
             t += 2f * Time.deltaTime;
         }
 

@@ -11,6 +11,8 @@ public class MouseLightController : MonoBehaviour
     public float acceleration = 10f;
     public float stoppingDistance = 0.5f;
     public float teleportDistance = 20f;
+    public float waitLightStrength = 10f;
+    public float followLightStrength = 6f;
 
     public UnityEngine.Rendering.Universal.Light2D light2D;
     public GameObject GFX;
