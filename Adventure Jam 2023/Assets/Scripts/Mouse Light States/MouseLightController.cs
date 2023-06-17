@@ -22,13 +22,14 @@ public class MouseLightController : MonoBehaviour
     MouseLightStateClass currentState;
     //States needed are: Follow state, wait state
 
+    [HideInInspector] public MouseLightInactiveState inactiveState = new MouseLightInactiveState();
+    [HideInInspector] public MouseLightWakingState wakingState = new MouseLightWakingState();
     [HideInInspector] public MouseLightFollowState followState = new MouseLightFollowState();
     [HideInInspector] public MouseLightWaitState waitState = new MouseLightWaitState();
 
-
     private void Start()
     {
-        currentState = followState;
+        currentState = inactiveState;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }

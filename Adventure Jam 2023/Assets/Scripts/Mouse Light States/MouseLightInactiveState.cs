@@ -6,10 +6,10 @@ public class MouseLightInactiveState : MouseLightStateClass
 {
     public override void EnterState(MouseLightController element)
     {
-
+        element.anim.SetBool("isOn", false);
     }
     public override void UpdateState(MouseLightController element)
     {
-
+        
     }
 }
