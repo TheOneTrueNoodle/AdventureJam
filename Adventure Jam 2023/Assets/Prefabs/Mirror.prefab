@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9032954509649008832}
   - component: {fileID: 9032954509649008834}
   - component: {fileID: 9032954509649008835}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Mirror Side
   m_TagString: Mirror
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9032954510061460705}
   - component: {fileID: 9032954510061460704}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 9032954510090169266}
   - component: {fileID: 9032954510090169267}
   - component: {fileID: 9032954510090169277}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Back Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
