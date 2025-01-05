@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MonsterManager : MonoBehaviour
     public bool monsterAttacking;
 
     public GameObject screenBlack;
+    public Volume attackPostProcessing;
 
     private void Start()
     {
@@ -34,9 +36,13 @@ public class MonsterManager : MonoBehaviour
 
     private void Update()
     {
+        if (attackPostProcessing.weight > 0 && AllMonstersFrozen == true)
+        {
+            attackPostProcessing.weight -= Time.deltaTime;
+        }
+        
         if(playerInArea)
         {
-            Debug.Log("AllMonstersFrozen = " + AllMonstersFrozen);
             if(AllMonstersFrozen != true && monsterAttacking != true)
             {
                 if(currentAttackInterval <= 0)
@@ -63,6 +69,8 @@ public class MonsterManager : MonoBehaviour
         screenBlack.SetActive(false);
         yield return new WaitForSeconds(0.2f);
         screenBlack.SetActive(true);
+
+        attackPostProcessing.weight = 1;
 
         Monster newMonster = null;
         for(int i = 0; i < monsters.Count; i++)

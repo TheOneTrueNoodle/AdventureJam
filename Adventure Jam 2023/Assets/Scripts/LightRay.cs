@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightRay : MonoBehaviour
@@ -8,7 +9,6 @@ public class LightRay : MonoBehaviour
     public Vector3 currentDirection;
 
     public float raySpeed = 10f;
-    [HideInInspector] public int rayID;
 
     private Rigidbody2D rb;
 
@@ -17,11 +17,10 @@ public class LightRay : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void CreateRay(LightRayRenderer renderer, Vector2 direction, int ID)
+    public void CreateRay(LightRayRenderer renderer, Vector2 direction)
     {
         parentRenderer = renderer;
         currentDirection = direction;
-        rayID = ID;
     }
 
     private void FixedUpdate()
@@ -31,7 +30,7 @@ public class LightRay : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Mirror")
+        if(collision.gameObject.CompareTag("Mirror"))
         {
             //Reflect this object
             Vector2 newDirection = Vector2.Reflect(currentDirection, collision.contacts[0].normal);
@@ -42,9 +41,8 @@ public class LightRay : MonoBehaviour
             collision.gameObject.GetComponent<LightRayGoal>().Activate();
             Destroy(gameObject);
         }
-        else
+        else if(collision.gameObject.CompareTag("Platform") != true)
         {
-            parentRenderer.activeRays.RemoveAt(rayID);
             Destroy(gameObject);
         }
     }

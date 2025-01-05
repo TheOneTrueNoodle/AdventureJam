@@ -18,7 +18,6 @@ public class LightRayRenderer : MonoBehaviour
     private float lightRayCooldownCurrent;
     public GameObject lightRayPrefab;
 
-    [HideInInspector] public List<GameObject> activeRays = new List<GameObject>();
     private SpriteRenderer gfx;
 
     private void Start()
@@ -43,10 +42,7 @@ public class LightRayRenderer : MonoBehaviour
 
                     LightRay lightRay = newRay.GetComponent<LightRay>();
 
-                    int rayID = activeRays.Count;
-                    activeRays.Add(newRay);
-
-                    lightRay.CreateRay(this, getDirection(shootDirection), rayID);
+                    lightRay.CreateRay(this, getDirection(shootDirection));
                 }
                 else
                 {

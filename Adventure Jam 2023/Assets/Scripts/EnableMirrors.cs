@@ -22,7 +22,7 @@ public class EnableMirrors : MonoBehaviour
         foreach (Mirror mirror in mirrors)
         {
             mirror.spriteRenderer.color = enabledColor;
-            mirror.disableColliders();
+            mirror.enableColliders();
         }
     }
 }

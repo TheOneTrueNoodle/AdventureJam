@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mirror
   - Mouse Light
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Player
   - Light Ray
   - Mirror
-  - 
+  - Platform
   - 
   - 
   - 

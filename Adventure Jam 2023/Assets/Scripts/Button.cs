@@ -16,6 +16,8 @@ public class Button : MonoBehaviour
     [SerializeField] private GameObject ButtonObj;
     [SerializeField] private GameObject ButtonPressedObj;
 
+    [SerializeField] private GameObject inputDisp;
+
     private void Update()
     {
         if(singleActionTimer > 0)
@@ -44,6 +46,7 @@ public class Button : MonoBehaviour
         if(collision.tag == "Player")
         {
             playerNear = true;
+            inputDisp.SetActive(true);
         }
     }
 
@@ -52,6 +55,7 @@ public class Button : MonoBehaviour
         if (collision.tag == "Player")
         {
             playerNear = false;
+            inputDisp.SetActive(false);
         }
     }
 
